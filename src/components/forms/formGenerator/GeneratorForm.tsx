@@ -15,7 +15,7 @@ const GeneratorForm: FC = () => {
   return (
     <>
       <Heading w="100%" textAlign={"center"} fontWeight="normal" mb="2%">
-        User Registration
+        Form Generator
       </Heading>
       <Flex>
         <Form
