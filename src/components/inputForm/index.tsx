@@ -35,7 +35,6 @@ const InputForm: FC<CustomFieldProps> = ({
 
   return (
     <FormControl isInvalid={error ? true : false}>
-      <FormLabel htmlFor="name">{label}</FormLabel>
       <Input
         id={name}
         placeholder={name}
