@@ -4,7 +4,7 @@ import { ReactElement } from "../../interfaces/react";
 import { Heading } from "@chakra-ui/react";
 
 interface ICard {
-  children: ReactElement[];
+  children: ReactElement[] | ReactElement | void[];
 }
 const Card: FC<ICard> = ({ children }) => {
   return (
