@@ -2,7 +2,7 @@ const Fields = {
   email: 'email',
   password: 'password',
   name: 'Nombre',
-  name_model: 'Nombre del modelo',
+  models: 'models',
   fields: 'fields',
 };
 

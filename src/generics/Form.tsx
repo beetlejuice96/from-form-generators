@@ -1,9 +1,9 @@
-import { useEffect } from "react";
+import { ReactNode, useEffect } from "react";
 import { useForm, UseFormProps, FormProvider } from "react-hook-form";
 import { ReactElement } from "../interfaces/react";
 
 interface FormProps extends UseFormProps {
-  children: ReactElement | ReactElement[];
+  children: ReactNode[] | ReactNode;
   className?: string;
   cleanOnSubmit?: boolean;
   id?: string;
