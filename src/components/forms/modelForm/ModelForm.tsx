@@ -9,8 +9,9 @@ import { Button } from "@chakra-ui/react";
 
 interface IModelForm {
   deleteAction: () => void;
+  differentiator: any;
 }
-const ModelForm: FC<IModelForm> = ({ deleteAction }) => {
+const ModelForm: FC<IModelForm> = ({ deleteAction, differentiator }) => {
   const addNewField = () => {};
 
   // const removeField = (fieldIndex: number) => () => {
@@ -21,7 +22,7 @@ const ModelForm: FC<IModelForm> = ({ deleteAction }) => {
       <Button colorScheme="blue" onClick={deleteAction}>
         + eliminar modelo
       </Button>
-      <InputForm name={"nameModel"} />
+      <InputForm name={`models[${differentiator}].name`} />
       {/* {fields.map((field, index) => {
         return (
           <div id={field.id} key={field.id}>
