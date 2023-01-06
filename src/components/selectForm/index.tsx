@@ -27,8 +27,12 @@ const SelectForm: FC<CustomSelectProps> = (props) => {
         onChange={onChange}
         {...props}
       >
-        {props.options.map((option) => {
-          return <option value={option.value}>{option.label}</option>;
+        {props.options.map((option, index) => {
+          return (
+            <option key={index} value={option.value}>
+              {option.label}
+            </option>
+          );
         })}
       </Select>
       <FormErrorMessage>{error?.message}</FormErrorMessage>

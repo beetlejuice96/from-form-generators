@@ -1,12 +1,9 @@
 import { Box, Stack } from "@chakra-ui/react";
-import React, { FC } from "react";
+import React, { FC, PropsWithChildren } from "react";
 import { ReactElement } from "../../interfaces/react";
 import { Heading } from "@chakra-ui/react";
 
-interface ICard {
-  children: ReactElement[] | ReactElement | void[];
-}
-const Card: FC<ICard> = ({ children }) => {
+const Card: FC = ({ children }: PropsWithChildren) => {
   return (
     <Box
       borderWidth="1px"
