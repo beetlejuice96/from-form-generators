@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import { Button, Flex, Heading } from "@chakra-ui/react";
+import { Button, Container, Flex, Heading } from "@chakra-ui/react";
 import { Form } from "../../../generics/Form";
 import InputForm from "../../inputForm";
 import constants from "../../../constants";
@@ -20,7 +20,7 @@ const GeneratorForm: FC = () => {
         Form Generator
       </Heading>
 
-      <Flex>
+      <Container maxW="container.xl">
         <Form
           onSubmit={handleSave}
           defaultValues={GeneratorFormConfig}
@@ -29,7 +29,7 @@ const GeneratorForm: FC = () => {
         >
           <GeneratorFormContent />
         </Form>
-      </Flex>
+      </Container>
     </>
   );
 };

@@ -3,51 +3,56 @@ import InputForm from "../../inputForm";
 import constants from "../../../constants";
 import { Model } from "../../../interfaces/generatorForm/Model";
 import { ModelForm } from "../modelForm";
-import { Button } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Divider,
+  Flex,
+  Spacer,
+  VStack,
+  Wrap,
+} from "@chakra-ui/react";
 import { useFieldArray, useFormContext } from "react-hook-form";
 const GeneratorFormContent = () => {
   const { setValue, getValues } = useFormContext();
   const { fields, append, remove } = useFieldArray({
     name: constants.FIELDS.models,
   });
-  const [models, setModels] = useState<Model[]>([]);
 
-  const addNewField = () => {
-    setModels([
-      {
-        name: "",
-        fields: [],
-      },
-      ...models,
-    ]);
+  const addNewModel = () => {
     append({
       name: "",
       fields: [],
     } as Model);
   };
-
   console.log(fields);
-  const removeField = (fieldIndex: number) => () => {
-    const updatedModels = models.filter((model, index) => index !== fieldIndex);
-    setModels(updatedModels);
+  const removeModel = (fieldIndex: number) => () => {
+    remove(fieldIndex);
   };
   return (
-    <div>
-      <Button colorScheme="blue" onClick={addNewField}>
+    <>
+      <Box display={"flex"} pb={4}>
+        <Spacer />
+        <Button colorScheme="green" type="submit">
+          Generar
+        </Button>
+      </Box>
+      <Divider />
+      <InputForm name={constants.FIELDS.name} w={"auto"} mt={2} />
+      <Button colorScheme="blue" onClick={addNewModel} mt={2}>
         + nuevo modelo
       </Button>
-      <InputForm name={constants.FIELDS.name} />
-      {fields.map((model, index) => (
-        <ModelForm
-          key={index}
-          deleteAction={removeField(index)}
-          differentiator={index}
-        />
-      ))}
-      <Button colorScheme="blue" type="submit">
-        Generar
-      </Button>
-    </div>
+      <Wrap p={2}>
+        {fields.map((model, index) => (
+          <ModelForm
+            key={index}
+            deleteAction={removeModel(index)}
+            differentiator={index}
+            model={model as unknown as Model}
+          />
+        ))}
+      </Wrap>
+    </>
   );
 };
 export default GeneratorFormContent;

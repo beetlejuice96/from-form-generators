@@ -1,36 +1,39 @@
 import {
   FormControl,
   FormErrorMessage,
-  FormLabel,
-  Input,
-  InputProps,
+  Select,
+  SelectProps,
 } from "@chakra-ui/react";
-import { FC } from "react";
+import React, { FC } from "react";
 import { useController } from "react-hook-form";
 
-interface CustomFieldProps extends InputProps {
+interface CustomSelectProps extends SelectProps {
   name: string;
+  options: { value: any; label: string }[];
 }
 
-const InputForm: FC<CustomFieldProps> = (props) => {
+const SelectForm: FC<CustomSelectProps> = (props) => {
   const {
     field: { onChange, onBlur, value, ref },
     fieldState: { error },
   } = useController({ name: props.name });
-
   return (
     <FormControl isInvalid={error ? true : false}>
-      <Input
+      <Select
         id={props.name}
         placeholder={props.name}
         isInvalid={error ? true : false}
         value={value}
         onChange={onChange}
         {...props}
-      />
+      >
+        {props.options.map((option) => {
+          return <option value={option.value}>{option.label}</option>;
+        })}
+      </Select>
       <FormErrorMessage>{error?.message}</FormErrorMessage>
     </FormControl>
   );
 };
 
-export default InputForm;
+export default SelectForm;
