@@ -19,14 +19,13 @@ const InputForm: FC<CustomFieldProps> = (props) => {
   } = useController({ name: props.name });
 
   return (
-    <FormControl isInvalid={error ? true : false}>
+    <FormControl isInvalid={error ? true : false} {...props}>
       <Input
         id={props.name}
         placeholder={props.name}
         isInvalid={error ? true : false}
         value={value}
         onChange={onChange}
-        {...props}
       />
       <FormErrorMessage>{error?.message}</FormErrorMessage>
     </FormControl>

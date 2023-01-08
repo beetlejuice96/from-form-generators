@@ -7,9 +7,10 @@ import {
 import React, { FC } from "react";
 import { useController } from "react-hook-form";
 
-interface CustomSelectProps extends SelectProps {
+interface CustomSelectProps {
   name: string;
   options: { value: any; label: string }[];
+  propsStyle: SelectProps;
 }
 
 const SelectForm: FC<CustomSelectProps> = (props) => {
@@ -18,7 +19,7 @@ const SelectForm: FC<CustomSelectProps> = (props) => {
     fieldState: { error },
   } = useController({ name: props.name });
   return (
-    <FormControl isInvalid={error ? true : false}>
+    <FormControl isInvalid={error ? true : false} {...props.propsStyle}>
       <Select
         id={props.name}
         placeholder={props.name}

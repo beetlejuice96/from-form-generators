@@ -12,7 +12,7 @@ import {
   VStack,
   Wrap,
 } from "@chakra-ui/react";
-import { useFieldArray, useFormContext } from "react-hook-form";
+import { useFieldArray } from "react-hook-form";
 const GeneratorFormContent = () => {
   const { fields, append, remove } = useFieldArray({
     name: constants.FIELDS.models,
@@ -37,10 +37,13 @@ const GeneratorFormContent = () => {
         </Button>
       </Box>
       <Divider />
-      <InputForm name={constants.FIELDS.name} w={"auto"} mt={2} />
-      <Button colorScheme="blue" onClick={addNewModel} mt={2}>
-        + nuevo modelo
-      </Button>
+      <Wrap mt={2}>
+        <InputForm name={constants.FIELDS.name} maxW={300} />
+        <Button colorScheme="blue" onClick={addNewModel}>
+          + nuevo modelo
+        </Button>
+      </Wrap>
+
       <Wrap p={2}>
         {fields.map((model, index) => (
           <ModelForm

@@ -17,6 +17,7 @@ import {
   Divider,
   Box,
   Stack,
+  Flex,
 } from "@chakra-ui/react";
 import { CloseIcon, DeleteIcon } from "@chakra-ui/icons";
 import { Model } from "../../../interfaces/generatorForm/Model";
@@ -43,31 +44,22 @@ const ModelForm: FC<IModelForm> = ({ deleteAction, differentiator, model }) => {
 
   return (
     <Card minW={"350px"} maxW={"400px"}>
-      <CardHeader display={"flex"} alignItems={"center"} pb={0}>
-        <Heading w="90px" size="md">
-          {title}
-        </Heading>
-        <Spacer />
+      <CardHeader display={"flex"} pb={0}>
+        <InputForm name={`models[${differentiator}].name`} />
         <IconButton
           colorScheme="red"
           onClick={deleteAction}
           aria-label="delete model"
           icon={<DeleteIcon />}
+          ml={1}
         />
       </CardHeader>
       <CardBody>
-        <InputForm name={`models[${differentiator}].name`} />
         <Divider my={2} />
         <Button onClick={createField}>+ nuevo campo</Button>
         {fields.map((field, index) => {
           return (
-            <Box
-              id={field.id}
-              key={field.id}
-              display={"flex"}
-              alignItems={"center"}
-              mt={3}
-            >
+            <Box id={field.id} key={field.id} display={"flex"} mt={3}>
               <IconButton
                 onClick={() => remove(index)}
                 aria-label="delete model"
@@ -75,15 +67,17 @@ const ModelForm: FC<IModelForm> = ({ deleteAction, differentiator, model }) => {
                 mr={2}
               />
 
-              <Stack spacing={1}>
-                <InputForm
-                  name={`models[${differentiator}].fields[${index}].name`}
-                />
-                <SelectForm
-                  name={`models[${differentiator}].fields[${index}].type`}
-                  options={options}
-                />
-              </Stack>
+              <InputForm
+                mr={2}
+                name={`models[${differentiator}].fields[${index}].name`}
+              />
+              <SelectForm
+                name={`models[${differentiator}].fields[${index}].type`}
+                options={options}
+                propsStyle={{
+                  maxW: 120,
+                }}
+              />
             </Box>
           );
         })}
