@@ -14,7 +14,6 @@ import {
 } from "@chakra-ui/react";
 import { useFieldArray, useFormContext } from "react-hook-form";
 const GeneratorFormContent = () => {
-  const { setValue, getValues } = useFormContext();
   const { fields, append, remove } = useFieldArray({
     name: constants.FIELDS.models,
   });
@@ -25,7 +24,7 @@ const GeneratorFormContent = () => {
       fields: [],
     } as Model);
   };
-  console.log(fields);
+
   const removeModel = (fieldIndex: number) => () => {
     remove(fieldIndex);
   };
@@ -45,7 +44,7 @@ const GeneratorFormContent = () => {
       <Wrap p={2}>
         {fields.map((model, index) => (
           <ModelForm
-            key={index}
+            key={model.id}
             deleteAction={removeModel(index)}
             differentiator={index}
             model={model as unknown as Model}
