@@ -1,40 +1,33 @@
 import React, { FC, useEffect, useState } from "react";
-import { Form } from "../../../generics/Form";
-import InputForm from "../../inputForm";
-import constants from "../../../constants";
-import { useFieldArray, useWatch } from "react-hook-form";
-import { Field } from "../../../interfaces/generatorForm/Field";
+import { Form } from "../../generics/Form";
+import InputForm from "../inputForm";
+import constants from "../../constants";
+import { useFieldArray } from "react-hook-form";
+import { Field } from "../../interfaces/generatorForm/Field";
 
 import {
   Button,
   Card,
   CardBody,
   CardHeader,
-  Heading,
-  Spacer,
-  Wrap,
   IconButton,
   Divider,
   Box,
-  Stack,
-  Flex,
 } from "@chakra-ui/react";
 import { CloseIcon, DeleteIcon } from "@chakra-ui/icons";
-import { Model } from "../../../interfaces/generatorForm/Model";
-import SelectForm from "../../selectForm";
-import { options } from "../../../constants/optionstypeFields";
+import SelectForm from "../selectForm";
+import { options } from "../../constants/optionstypeFields";
 
-interface IModelForm {
+interface IModelCard {
   deleteAction: () => void;
   differentiator: any;
-  model: Model;
 }
 
-const ModelForm: FC<IModelForm> = ({ deleteAction, differentiator, model }) => {
+const ModelCard: FC<IModelCard> = ({ deleteAction, differentiator }) => {
   const { fields, append, remove } = useFieldArray({
     name: `${constants.FIELDS.models}[${differentiator}].fields`,
   });
-  const title = useWatch({ name: `models[${differentiator}].name` });
+
   const createField = () => {
     append({
       name: "",
@@ -86,4 +79,4 @@ const ModelForm: FC<IModelForm> = ({ deleteAction, differentiator, model }) => {
   );
 };
 
-export default ModelForm;
+export default ModelCard;

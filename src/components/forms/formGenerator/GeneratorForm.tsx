@@ -1,12 +1,9 @@
-import { FC, useState } from "react";
-import { Button, Container, Flex, Heading } from "@chakra-ui/react";
+import { FC } from "react";
+import { Container, Heading } from "@chakra-ui/react";
 import { Form } from "../../../generics/Form";
-import InputForm from "../../inputForm";
-import constants from "../../../constants";
 import { GeneratorFormSchema } from "../../../utils/schemas";
 import { GeneratorFormConfig } from "./GeneratorFormConfig";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { ModelForm } from "../modelForm";
 import { Model } from "../../../interfaces/generatorForm/Model";
 import GeneratorFormContent from "./GeneratorFormContent";
 

@@ -4,6 +4,7 @@ const Fields = {
   name: 'Nombre',
   models: 'models',
   fields: 'fields',
+  resources: 'resources',
 };
 
 export default Fields;

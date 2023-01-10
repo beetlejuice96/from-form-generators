@@ -1,21 +1,20 @@
-import React, { useState } from "react";
 import InputForm from "../../inputForm";
 import constants from "../../../constants";
 import { Model } from "../../../interfaces/generatorForm/Model";
-import { ModelForm } from "../modelForm";
-import {
-  Box,
-  Button,
-  Divider,
-  Flex,
-  Spacer,
-  VStack,
-  Wrap,
-} from "@chakra-ui/react";
+import { Box, Button, Divider, Spacer, Wrap } from "@chakra-ui/react";
 import { useFieldArray } from "react-hook-form";
+import { ModelCard } from "../../modelCard";
+import { Resource } from "../../../interfaces/generatorForm/Resource";
 const GeneratorFormContent = () => {
   const { fields, append, remove } = useFieldArray({
     name: constants.FIELDS.models,
+  });
+  const {
+    fields: fieldsResource,
+    append: appendResource,
+    remove: removeResource,
+  } = useFieldArray({
+    name: constants.FIELDS.resources,
   });
 
   const addNewModel = () => {
@@ -25,9 +24,17 @@ const GeneratorFormContent = () => {
     } as Model);
   };
 
+  const addNewResource = () => {
+    appendResource({
+      type: "",
+      operations: [],
+    } as Resource);
+  };
+
   const removeModel = (fieldIndex: number) => () => {
     remove(fieldIndex);
   };
+
   return (
     <>
       <Box display={"flex"} pb={4}>
@@ -42,16 +49,31 @@ const GeneratorFormContent = () => {
         <Button colorScheme="blue" onClick={addNewModel}>
           + nuevo modelo
         </Button>
+
+        <Button
+          colorScheme="orange"
+          onClick={addNewResource}
+          disabled={
+            fields.length === 0 || fieldsResource.length === fields.length
+          }
+        >
+          + nuevo recurso
+        </Button>
       </Wrap>
 
       <Wrap p={2}>
         {fields.map((model, index) => (
-          <ModelForm
+          <ModelCard
             key={model.id}
             deleteAction={removeModel(index)}
             differentiator={index}
-            model={model as unknown as Model}
           />
+        ))}
+      </Wrap>
+
+      <Wrap p={2}>
+        {fieldsResource.map((resource, index) => (
+          <div>{resource.id}</div>
         ))}
       </Wrap>
     </>
